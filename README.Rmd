@@ -46,6 +46,7 @@ deaths <- av %>%
 head(deaths)
 View(deaths)
 
+deaths %>% count(Died)
 
 
 
