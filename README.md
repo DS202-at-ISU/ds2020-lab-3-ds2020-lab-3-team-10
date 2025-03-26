@@ -152,19 +152,22 @@ returns <- av %>%
   ) %>% 
   select(
     URL, Name.Alias, TimesReturn, Return
+  ) %>%
+  mutate(
+    TimesReturn = parse_number(TimesReturn)
   )
 head(returns)
 ```
 
     ## # A tibble: 6 × 4
     ##   URL                                              Name.Alias TimesReturn Return
-    ##   <chr>                                            <chr>      <chr>       <chr> 
-    ## 1 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return1     "NO"  
-    ## 2 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return2     ""    
-    ## 3 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return3     ""    
-    ## 4 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return4     ""    
-    ## 5 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return5     ""    
-    ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-6… "Janet va… Return1     "YES"
+    ##   <chr>                                            <chr>            <dbl> <chr> 
+    ## 1 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo…           1 "NO"  
+    ## 2 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo…           2 ""    
+    ## 3 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo…           3 ""    
+    ## 4 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo…           4 ""    
+    ## 5 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo…           5 ""    
+    ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-6… "Janet va…           1 "YES"
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
@@ -180,12 +183,15 @@ possible.
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+Isaac’s Statement: \> “But you can only tempt death so many times.
+There’s a 2-in-3 chance that a member of the Avengers returned from
+their first stint in the afterlife”
 
 ### Include the code
 
-Make sure to include the code to derive the (numeric) fact for the
-statement
+``` r
+death1 <- filter(deaths, Died == "1")
+```
 
 ### Include your answer
 
