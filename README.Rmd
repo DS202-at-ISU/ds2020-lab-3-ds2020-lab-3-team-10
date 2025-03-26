@@ -47,7 +47,6 @@ deaths <- av %>%
     Time = parse_number(Time)
   )
 head(deaths)
-View(deaths)
 
 deaths %>% count(Died)
 
@@ -68,7 +67,6 @@ returns <- av %>%
     URL, Name.Alias, TimesReturn, Return
   )
 head(returns)
-View(returns)
 
 ```
 
@@ -97,15 +95,31 @@ Upload your changes to the repository. Discuss and refine answers as a team.
 ## Eitan's Work
 ### FiveThirtyEight Statement
 
-The statement I chose to fact check is 
+The statement I chose to fact check is "The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times."
 
 ### Include the code
 
-Make sure to include the code to derive the (numeric) fact for the statement
+Code for fact-checking statement.
+
+```{r}
+# Check Jocasta's deaths
+jocasta_deaths <- deaths %>% 
+  filter(Name.Alias == "Jocasta", Died == "YES") %>% 
+  count()
+
+# Check Jocasta's returns
+jocasta_returns <- returns %>% 
+  filter(Name.Alias == "Jocasta", Return == "YES") %>% 
+  count()
+
+if (jocasta_returns == jocasta_deaths) {
+  print("Statement is true.")
+} else {
+   print("Statement is false.")
+}
+```
 
 ### Include your answer
 
-Include at least one sentence discussing the result of your fact-checking endeavor.
-
-Upload your changes to the repository. Discuss and refine answers as a team.
+My conclusion is that the statement is true and has been fact-checked since the number of times Jocasta has been destroyed and returned is equivalent.
 

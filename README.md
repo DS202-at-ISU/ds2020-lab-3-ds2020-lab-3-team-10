@@ -90,16 +90,6 @@ library(dplyr)
 library(tidyverse)
 ```
 
-    ## Warning: package 'tidyverse' was built under R version 4.4.3
-
-    ## Warning: package 'tidyr' was built under R version 4.4.3
-
-    ## Warning: package 'readr' was built under R version 4.4.3
-
-    ## Warning: package 'forcats' was built under R version 4.4.3
-
-    ## Warning: package 'lubridate' was built under R version 4.4.3
-
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
     ## ✔ ggplot2   3.5.1     ✔ stringr   1.5.1
@@ -138,8 +128,6 @@ head(deaths)
     ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-616) "Janet van Dyn…     1 "YES"
 
 ``` r
-View(deaths)
-
 deaths %>% count(Died)
 ```
 
@@ -178,10 +166,6 @@ head(returns)
     ## 5 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return5     ""    
     ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-6… "Janet va… Return1     "YES"
 
-``` r
-View(returns)
-```
-
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
 
@@ -210,3 +194,42 @@ fact-checking endeavor.
 
 Upload your changes to the repository. Discuss and refine answers as a
 team.
+
+## Eitan’s Work
+
+### FiveThirtyEight Statement
+
+The statement I chose to fact check is “The MVP of the Earth-616 Marvel
+Universe Avengers has to be Jocasta — an android based on Janet van Dyne
+and built by Ultron — who has been destroyed five times and then
+recovered five times.”
+
+### Include the code
+
+Code for fact-checking statement.
+
+``` r
+# Check Jocasta's deaths
+jocasta_deaths <- deaths %>% 
+  filter(Name.Alias == "Jocasta", Died == "YES") %>% 
+  count()
+
+# Check Jocasta's returns
+jocasta_returns <- returns %>% 
+  filter(Name.Alias == "Jocasta", Return == "YES") %>% 
+  count()
+
+if (jocasta_returns == jocasta_deaths) {
+  print("Statement is true.")
+} else {
+   print("Statement is false.")
+}
+```
+
+    ## [1] "Statement is true."
+
+### Include your answer
+
+My conclusion is that the statement is true and has been fact-checked
+since the number of times Jocasta has been destroyed and returned is
+equivalent.
