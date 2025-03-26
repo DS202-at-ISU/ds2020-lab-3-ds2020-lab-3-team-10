@@ -42,6 +42,9 @@ deaths <- av %>%
   ) %>% 
   select(
     URL, Name.Alias, Time, Died
+  ) %>%
+  mutate(
+    Time = parse_number(Time)
   )
 head(deaths)
 View(deaths)
