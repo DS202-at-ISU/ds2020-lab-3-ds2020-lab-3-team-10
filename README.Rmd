@@ -47,12 +47,8 @@ deaths <- av %>%
     Time = parse_number(Time)
   )
 head(deaths)
-View(deaths)
 
 deaths %>% count(Died)
-
-
-
 
 ```
 Similarly, deal with the returns of characters.
@@ -68,14 +64,12 @@ returns <- av %>%
     values_to = "Return"
   ) %>% 
   select(
-    URL, Name.Alias, TimesReturn, Died
+    URL, Name.Alias, TimesReturn, Return
+  ) %>%
+  mutate(
+    TimesReturn = parse_number(TimesReturn)
   )
 head(returns)
-View(returns)
-
-
-
-
 
 ```
 
@@ -93,6 +87,7 @@ totalDeaths / totalPeople
 ```
 
 
+
 ## Individually
 
 For each team member, copy this part of the report. 
@@ -101,10 +96,14 @@ Each team member picks one of the statements in the FiveThirtyEight [analysis](h
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+Isaac's Statement:
+> "But you can only tempt death so many times. There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife"
+
 ### Include the code
 
-Make sure to include the code to derive the (numeric) fact for the statement
+``` {r}
+death1 <- filter(deaths, Died == "1")
+```
 
 ### Include your answer
 
@@ -121,3 +120,35 @@ Iron Man, Hulk, Captain America, Thor, Hawkeye, Black Widow, Scarlet Witch, Quic
 
 ```
 Upload your changes to the repository. Discuss and refine answers as a team.
+
+## Eitan's Work
+### FiveThirtyEight Statement
+
+The statement I chose to fact check is "The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times."
+
+### Include the code
+
+Code for fact-checking statement.
+
+```{r}
+# Check Jocasta's deaths
+jocasta_deaths <- deaths %>% 
+  filter(Name.Alias == "Jocasta", Died == "YES") %>% 
+  count()
+
+# Check Jocasta's returns
+jocasta_returns <- returns %>% 
+  filter(Name.Alias == "Jocasta", Return == "YES") %>% 
+  count()
+
+if (jocasta_returns == jocasta_deaths) {
+  print("Statement is true.")
+} else {
+   print("Statement is false.")
+}
+```
+
+### Include your answer
+
+My conclusion is that the statement is true and has been fact-checked since the number of times Jocasta has been destroyed and returned is equivalent.
+
