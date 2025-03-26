@@ -68,7 +68,7 @@ returns <- av %>%
     values_to = "Return"
   ) %>% 
   select(
-    URL, Name.Alias, TimesReturn, Died
+    URL, Name.Alias, TimesReturn, Return
   )
 head(returns)
 View(returns)

@@ -71,7 +71,116 @@ between 1 and 5 (look into the function `parse_number`); Death is a
 categorical variables with values “yes”, “no” and ““. Call the resulting
 data set `deaths`.
 
+``` r
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+library(tidyverse)
+```
+
+    ## Warning: package 'tidyverse' was built under R version 4.4.3
+
+    ## Warning: package 'tidyr' was built under R version 4.4.3
+
+    ## Warning: package 'readr' was built under R version 4.4.3
+
+    ## Warning: package 'forcats' was built under R version 4.4.3
+
+    ## Warning: package 'lubridate' was built under R version 4.4.3
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ forcats   1.0.0     ✔ readr     2.1.5
+    ## ✔ ggplot2   3.5.1     ✔ stringr   1.5.1
+    ## ✔ lubridate 1.9.4     ✔ tibble    3.2.1
+    ## ✔ purrr     1.0.4     ✔ tidyr     1.3.1
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+deaths <- av %>% 
+  pivot_longer(
+    starts_with("Death"),
+    names_to = "Time",
+    values_to = "Died"
+  ) %>% 
+  select(
+    URL, Name.Alias, Time, Died
+  ) %>%
+  mutate(
+    Time = parse_number(Time)
+  )
+head(deaths)
+```
+
+    ## # A tibble: 6 × 4
+    ##   URL                                                Name.Alias       Time Died 
+    ##   <chr>                                              <chr>           <dbl> <chr>
+    ## 1 http://marvel.wikia.com/Henry_Pym_(Earth-616)      "Henry Jonatha…     1 "YES"
+    ## 2 http://marvel.wikia.com/Henry_Pym_(Earth-616)      "Henry Jonatha…     2 ""   
+    ## 3 http://marvel.wikia.com/Henry_Pym_(Earth-616)      "Henry Jonatha…     3 ""   
+    ## 4 http://marvel.wikia.com/Henry_Pym_(Earth-616)      "Henry Jonatha…     4 ""   
+    ## 5 http://marvel.wikia.com/Henry_Pym_(Earth-616)      "Henry Jonatha…     5 ""   
+    ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-616) "Janet van Dyn…     1 "YES"
+
+``` r
+View(deaths)
+
+deaths %>% count(Died)
+```
+
+    ## # A tibble: 3 × 2
+    ##   Died      n
+    ##   <chr> <int>
+    ## 1 ""      671
+    ## 2 "NO"    105
+    ## 3 "YES"    89
+
 Similarly, deal with the returns of characters.
+
+``` r
+library(dplyr)
+library(tidyverse)
+
+returns <- av %>% 
+  pivot_longer(
+    starts_with("Return"),
+    names_to = "TimesReturn",
+    values_to = "Return"
+  ) %>% 
+  select(
+    URL, Name.Alias, TimesReturn, Return
+  )
+head(returns)
+```
+
+    ## # A tibble: 6 × 4
+    ##   URL                                              Name.Alias TimesReturn Return
+    ##   <chr>                                            <chr>      <chr>       <chr> 
+    ## 1 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return1     "NO"  
+    ## 2 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return2     ""    
+    ## 3 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return3     ""    
+    ## 4 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return4     ""    
+    ## 5 http://marvel.wikia.com/Henry_Pym_(Earth-616)    "Henry Jo… Return5     ""    
+    ## 6 http://marvel.wikia.com/Janet_van_Dyne_(Earth-6… "Janet va… Return1     "YES"
+
+``` r
+View(returns)
+```
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
