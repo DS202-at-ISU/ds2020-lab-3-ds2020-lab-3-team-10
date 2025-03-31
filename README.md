@@ -75,6 +75,8 @@ data set `deaths`.
 library(dplyr)
 ```
 
+    ## Warning: package 'dplyr' was built under R version 4.4.3
+
     ## 
     ## Attaching package: 'dplyr'
 
@@ -93,8 +95,8 @@ library(tidyverse)
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
     ## ✔ ggplot2   3.5.1     ✔ stringr   1.5.1
-    ## ✔ lubridate 1.9.4     ✔ tibble    3.2.1
-    ## ✔ purrr     1.0.4     ✔ tidyr     1.3.1
+    ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+    ## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
 
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
@@ -172,6 +174,33 @@ head(returns)
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
 
+``` r
+totalPeople = length(unique(deaths$Name.Alias))
+
+totalDeaths = length(which(deaths$Died == "YES"))
+max(deaths$Time)
+```
+
+    ## [1] 5
+
+``` r
+totalPeople
+```
+
+    ## [1] 163
+
+``` r
+totalDeaths
+```
+
+    ## [1] 89
+
+``` r
+totalDeaths / totalPeople
+```
+
+    ## [1] 0.5460123
+
 ## Individually
 
 For each team member, copy this part of the report.
@@ -197,6 +226,11 @@ death1 <- filter(deaths, Died == "1")
 
 Include at least one sentence discussing the result of your
 fact-checking endeavor.
+
+Cameron Kraklio Iron Man, Hulk, Captain America, Thor, Hawkeye, Black
+Widow, Scarlet Witch, Quicksilver and The Vision — every single one of
+them has died at least once in the course of their time Avenging in the
+comics. In fact, Hawkeye died twice
 
 Upload your changes to the repository. Discuss and refine answers as a
 team.

@@ -112,7 +112,54 @@ Include at least one sentence discussing the result of your fact-checking endeav
 Cameron Kraklio
 Iron Man, Hulk, Captain America, Thor, Hawkeye, Black Widow, Scarlet Witch, Quicksilver and The Vision — every single one of them has died at least once in the course of their time Avenging in the comics. In fact, Hawkeye died twice
 ```{r}
+Hawkeye_Deaths <- deaths %>% 
+  filter(Name.Alias == "Clinton Francis Barton", Died == "YES") %>% 
+  count()
+if(Hawkeye_Deaths == 2)
+  print("Hawkeye has died twice")
 
+Iron_Man_Deaths <- deaths %>% 
+  filter(Name.Alias == "Anthony Edward \"Tony\" Stark", Died == "YES") %>% 
+  count()
+if(Iron_Man_Deaths >= 1)
+  print("Iron Man has died at least once")
+
+Captain_America_Deaths <- deaths %>% 
+  filter(Name.Alias == "Steven Rogers", Died == "YES") %>% 
+  count()
+if(Captain_America_Deaths >= 1)
+  print("Captain America has died at least once")
+
+Thor_Deaths <- deaths %>% 
+  filter(Name.Alias == "Thor Odinson", Died == "YES") %>% 
+  count()
+if(Thor_Deaths >= 1)
+  print("Thor has died at least once")
+
+
+Black_Widow_Deaths <- deaths %>% 
+  filter(Name.Alias == "Natalia Alianovna Romanova", Died == "YES") %>% 
+  count()
+if(Black_Widow_Deaths >= 1)
+  print("Black Widow has died at least once")
+
+Scarlet_Witch_Deaths <- deaths %>% 
+  filter(Name.Alias == "Wanda Maximoff", Died == "YES") %>% 
+  count()
+if(Scarlet_Witch_Deaths >= 1)
+  print("Scarlet Witch has died at least once")
+
+Quicksilver_Deaths <- deaths %>% 
+  filter(Name.Alias == "Pietro Maximoff", Died == "YES") %>% 
+  count()
+if(Quicksilver_Deaths >= 1)
+  print("Quicksilver has died at least once")
+
+Vision_Deaths <- deaths %>% 
+  filter(Name.Alias == "Victor Shade (alias)", Died == "YES") %>% 
+  count()
+if(Vision_Deaths >= 1)
+  print("The Vision has died at least once")
 
 
 
