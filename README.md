@@ -273,3 +273,43 @@ if (jocasta_returns == jocasta_deaths) {
 My conclusion is that the statement is true and has been fact-checked
 since the number of times Jocasta has been destroyed and returned is
 equivalent.
+
+### Naman's work
+
+### FiveThirtyEight Statement
+
+Given the Avengers’ 53 years in operation and overall mortality rate, fans of the comics can expect one current or former member to die every seven months or so, with a permanent death occurring once every 20 months.
+
+library(dplyr)
+
+
+avengers <- read.csv("avengers.csv")
+
+
+years_in_operation <- 53
+
+
+total_deaths <- avengers %>%
+  filter(!is.na(year_died)) %>%
+  summarise(total = n()) %>%
+  pull(total)
+
+
+death_rate <- total_deaths / (years_in_operation * 12)
+
+
+permanent_deaths <- avengers %>%
+  filter(permanent_death == 1) %>%
+  summarise(total = n()) %>%
+  pull(total)
+
+
+permanent_death_rate <- permanent_deaths / (years_in_operation * 12)
+
+
+death_interval <- 1 / death_rate
+permanent_death_interval <- 1 / permanent_death_rate
+
+### Include your answer
+
+The statement is true
